@@ -1,0 +1,62 @@
+/* @import url(../../index.css); */
+.homelandingpg1{
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 2px solid black; */
+    width: 100%;
+    height: fit-content;
+    padding-top: 2em;
+    /* background-color: var(--c5); */
+    display: none;
+    overflow: hidden;
+    margin: auto;
+    border-radius: 10px;
+}
+.homelandingpg2{
+    border-radius: 10px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 2px solid black; */
+    width: 100%;
+    height: fit-content;
+    /* background-color: var(--c5); */
+}
+.footer{
+    width: 91.6666%;
+    /* position: fixed;
+
+    bottom: 0;
+    left: auto; */
+    /* background-color: #ffff; */
+    background: #ffff;
+    /* border: 2px solid black; */
+    margin: auto;
+    margin-top: em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    /* background-color: var(--c5); */
+    height: fit-content;
+    
+}
+@media screen and (max-width:600px) {
+    .homelandingpg2{
+        display: none;
+    }
+    .homelandingpg1{
+        display: block;
+    }
+    .footer{
+        width: 100%;
+        border-radius: 5px;
+        position:fixed;
+        bottom: 0;
+        left: auto;
+        right: auto;
+    }
+}
