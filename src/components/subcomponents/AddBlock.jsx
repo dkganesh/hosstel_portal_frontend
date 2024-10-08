@@ -3,28 +3,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import HostelService, { ADMIN_BASE_URL } from '../../service/HostelService';
 import { useNavigate } from 'react-router-dom';
-import StudentService from '../../service/StudentService';
 
-export const ResetPass = ({isOpen, setIsOpen,open,close}) => {
-    const [pass,setPass] = useState({
-        email:"",
-        newPassword:""
+export const AddBlock = ({isOpen, setIsOpen,open,close}) => {
+    const [block,setRoom] = useState({
+        blockNumber:"",
+        staff:""
     });
     const nav =useNavigate();
     const token = useSelector((state)=>state.jwt_token_authentication);
     function handleChange(e){
-        setPass({...pass,[e.target.name]:e.target.value});
+        setRoom({...room,[e.target.name]:e.target.value});
     }
     function clear(){
-        setPass({email:"",
-            newPassword:""});
+        setRoom({roomNumber:"",
+            block:""});
     }
-    function resetPass(){
-        const link=ADMIN_BASE_URL+"/update/studentPassword";
-        StudentService.resetPassword(link,pass,{
+    function addRoomFunc(){
+        const link=ADMIN_BASE_URL+"/addRoom";
+        HostelService.addRoomService(link,room,{
           headers:{Authorization:"Bearer "+token}
         }).then(res=>{
-            alert("Password Changed...");
+            alert("Room Added");
             close();
         })
         .catch(err=>{
@@ -42,12 +41,12 @@ export const ResetPass = ({isOpen, setIsOpen,open,close}) => {
               duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0 shadow-2xl "
             >
               <DialogTitle as="h3" className="font-light text-center mb-3 text-lg">
-              Reset Password
+              Add Block
               </DialogTitle>
-              <input type="email" name="email" id="email"  required placeholder="Email" className='border-2 border-gray-600 mx-2 w-full rounded-md px-3 min-h-9 placeholder:font-light placeholder:text-black mb-3' value={pass.email} onChange={handleChange}/>
-              <input type="password" name="newPassword" id="password"  required placeholder="New Password" className='border-2 border-gray-600 mx-2 w-full rounded-md px-3 min-h-9 placeholder:font-light placeholder:text-black' value={pass.newPassword} onChange={handleChange}/>
+              <input type="number" name="blockNumber" id="std_login_email"  required placeholder="Block Number" className='border-2 border-gray-600 mx-2 w-full rounded-md px-3 min-h-9 placeholder:font-light placeholder:text-black mb-3' value={block.blockNumber} onChange={handleChange}/>
+              <input type="number" name="block" id="std_login_email"  required placeholder="Block" className='border-2 border-gray-600 mx-2 w-full rounded-md px-3 min-h-9 placeholder:font-light placeholder:text-black' value={room.block} onChange={handleChange}/>
               <div className="mt-4 flex items-center justify-center">
-              <Button className="bg-green-300 rounded-md px-3 py-1 hover:bg-green-500 border-2 border-green-500" onClick={resetPass}>Reset</Button>
+              <Button className="bg-green-300 rounded-md px-3 py-1 hover:bg-green-500 border-2 border-green-500" onClick={addRoomFunc}>Add Room</Button>
               <Button className="bg-yellow-300 rounded-md px-3 py-1 hover:bg-yellow-500 border-2 border-yellow-500 mx-2" onClick={clear}>Clear</Button>
               <Button className="bg-red-300 rounded-md px-3 py-1 hover:bg-red-500 border-2 border-red-500 mx-2" onClick={close}>Close</Button>
               

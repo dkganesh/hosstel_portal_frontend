@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { StudentPanel } from "./components/StudentPanel"
 import { StaffLoginForm } from "./components/StaffLoginForm"
 
+
 function App() {
 
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/studentPanel" element={<StudentPanel/>}/>
           <Route path="/register" element={<StudentSignUpForm/>}/>
         </Routes>
+        {/* <StudentPanel/> */}
       </BrowserRouter>
     </Provider>
   )

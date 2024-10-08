@@ -53,7 +53,7 @@ export const StudentSignInForm = () => {
             <button className=' mx-4 mb-3 rounded-md px-3 bg-yellow-400 border-2 border-yellow-600 font-normal py-1 hover:bg-yellow-600 ' onClick={e=>{e.preventDefault();setLoginForm({email:"",password:""})}}>Clear</button>
             </div>
            
-           <button className='bg-indigo-400 rounded-md px-2 py-1 font-normal hover:bg-indigo-500 border-2 border-indigo-500'>Forget Password</button>
+           {/* <button className='bg-indigo-400 rounded-md px-2 py-1 font-normal hover:bg-indigo-500 border-2 border-indigo-500'>Forget Password</button> */}
           </form>
         </div>
         </div>
