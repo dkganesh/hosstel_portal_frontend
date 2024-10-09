@@ -59,7 +59,7 @@ export const RoomDetails = ({isOpen, setIsOpen,open,close}) => {
              <>
         
                 <DialogTitle as="h3" className="font-light text-center mb-3 text-lg">
-                Students in Block
+                Students in Room
                 </DialogTitle>
                 {
                     students.map(e=><BlockStudent key={e.email} user={e}/>)

@@ -5,6 +5,7 @@ import { addStudentSignUp } from '../slices/Student_SignUp_Slice';
 import StudentService from '../service/StudentService';
 import { LoggedHeader } from './LoggedHeader';
 import { useNavigate } from 'react-router-dom';
+import { SendEmail } from '../SendEmail';
 
 export const StudentSignUpForm = () => {
     const nav=useNavigate();
@@ -56,11 +57,14 @@ export const StudentSignUpForm = () => {
         console.log("state updated")
         
         StudentService.registerStudent(student).then((res)=>{
-            axios.get(res.data).then(res=>{
-                console.log(res);
-                alert("Student Registered Successfully -> you can login now...");
-                nav("/");
-            }).catch(e=>console.log(e))
+            // axios.get(res.data).then(res=>{
+            //     console.log(res);
+            //     alert("Student Registered Successfully -> you can login now...");
+            //     nav("/");
+            // }).catch(e=>console.log(e))
+            // let resp = SendEmail(res.data,student);
+            console.log(res);
+            // alert(resp);
         })
         .catch((err)=>console.log(err))
 
