@@ -7,6 +7,7 @@ import { Home } from "./components/Home"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { StudentPanel } from "./components/StudentPanel"
 import { StaffLoginForm } from "./components/StaffLoginForm"
+import { LoggedHeader } from "./components/LoggedHeader"
 
 
 function App() {
@@ -22,7 +23,6 @@ function App() {
           <Route path="/studentPanel" element={<StudentPanel/>}/>
           <Route path="/register" element={<StudentSignUpForm/>}/>
         </Routes>
-        {/* <StudentPanel/> */}
       </BrowserRouter>
     </Provider>
   )

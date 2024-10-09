@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { findStudent ,addIndividual } from '../slices/AdminFindStudent';
 import { addStudentSignUp } from '../slices/Student_SignUp_Slice';
@@ -11,6 +11,8 @@ import axios from 'axios';
 import { SERVER_URL } from '../service/AuthenticationServices';
 
 export const LoggedHeader = () => {
+const[load,setLoad]=useState(false);
+
   const nav=useNavigate();
   const dispatch = useDispatch();
   function clearCache(e){
@@ -73,6 +75,7 @@ export const LoggedHeader = () => {
   const token =useSelector((state)=>state.jwt_token_authentication);
   async function clearToken(e){
     e.preventDefault();
+    setLoad(true);
     dispatch(addToken(""));
     clearCache();
     try {
@@ -83,11 +86,13 @@ export const LoggedHeader = () => {
       dispatch(logon(false))
       // window.location.reload(true);
       // console.log("refereshed");
+      setLoad(false);
       alert("Logged out");
       nav("/");
       }
     } catch (err) {
       console.log(err);
+      setLoad(false);
       alert("Logged out");
       nav("/");
     }
@@ -100,6 +105,7 @@ export const LoggedHeader = () => {
         <button className='mx-3 bg-red-400 rounded-md px-3 py-1 hover:bg-red-500 border-2 border-red-500'
         onClick={clearToken}
         >Logout</button>
+        {load && <div className='ml-3 h-[30px] w-[30px] border-x-4 border-blue-600 animate-spin rounded-full'></div>}
     </div>
   )
 }

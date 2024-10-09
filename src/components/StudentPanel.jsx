@@ -179,7 +179,7 @@ const data =useSelector((state)=>state.logged_user);
                         </div>
                         {
                             load && 
-                            <div className='my-3 h-[50px] w-[50px] border-x-4 border-blue-600 animate-spin rounded-full'>
+                            <div className='my-3 h-[30px] w-[30px] border-x-4 border-blue-600 animate-spin rounded-full'>
 
                             </div>
                         }
