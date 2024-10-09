@@ -8,7 +8,7 @@ export default function Footer(){
     
     return <div className={dk.footer}>
     <div>
-        <h4 className=" font-semibold p-1 m-1 text-sm sm:p-3 sm:m-2 ">Copyright 2024 @ SVCE - &gt; made by DK - unofficial webite</h4>
+        <h4 className=" font-semibold p-1 m-1 text-sm sm:p-3 sm:m-2 ">Copyright 2024 @ SVCE - &gt; made by DK - unofficial website</h4>
     </div>
     <div className=" font-semibold p-2 md:p-3 sm:p-3 m-2 flex flex-row flex-wrap items-center">
         
