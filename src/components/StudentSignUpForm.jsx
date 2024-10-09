@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { SendEmail } from '../SendEmail';
 
 export const StudentSignUpForm = () => {
+    const [load,setLoad]= useState(false);
+
     const nav=useNavigate();
     const[student,setStudent]=useState({
     name:"",
@@ -50,6 +52,7 @@ export const StudentSignUpForm = () => {
     }
     const dispatch =useDispatch();
     function handleSubmit(e){
+        setLoad(true);
         if(validate(student)){
         e.preventDefault();
         console.log(student);
@@ -62,11 +65,12 @@ export const StudentSignUpForm = () => {
             //     alert("Student Registered Successfully -> you can login now...");
             //     nav("/");
             // }).catch(e=>console.log(e))
-            // let resp = SendEmail(res.data,student);
+            setLoad(false);
+            SendEmail(res.data,student);
             console.log(res);
             // alert(resp);
         })
-        .catch((err)=>console.log(err))
+        .catch((err)=>{console.log(err);setLoad(false);})
 
 
         clearFunction(e);}
@@ -162,11 +166,13 @@ export const StudentSignUpForm = () => {
 
 
                 </div>
-                <button type='submit' className=' mx-4 mb-3 rounded-md px-3 bg-green-400 border-2 border-green-600 font-normal py-1 hover:bg-green-600 '>Register</button>
+                <div className="flex flex-row justify-center items-center mt-2">
+                    <button type='submit' className=' mx-4 mb-3 rounded-md px-3 bg-green-400 border-2 border-green-600 font-normal py-1 hover:bg-green-600 '>Register</button>
+                    {load && <div className='inline-block h-[30px] w-[30px] border-x-4 border-blue-600 animate-spin rounded-full mb-3'></div>}
+                    <button className=' mx-4 mb-3 rounded-md px-3 bg-yellow-300 border-2 border-yellow-500 font-normal py-1 hover:bg-yellow-500 ' onClick={clearFunction}>Clear</button>
+                    <button className=' mx-4 mb-3 rounded-md px-3 bg-green-400 border-2 border-green-600 font-normal py-1 hover:bg-green-600 ' onClick={()=>nav("/")}>LogIn</button>
 
-                <button className=' mx-4 mb-3 rounded-md px-3 bg-yellow-300 border-2 border-yellow-500 font-normal py-1 hover:bg-yellow-500 ' onClick={clearFunction}>Clear</button>
-                <button className=' mx-4 mb-3 rounded-md px-3 bg-green-400 border-2 border-green-600 font-normal py-1 hover:bg-green-600 ' onClick={()=>nav("/")}>LogIn</button>
-
+                </div>
 
             </form>
             </div>
