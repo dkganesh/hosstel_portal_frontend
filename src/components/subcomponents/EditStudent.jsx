@@ -4,6 +4,7 @@ import StudentService, { ADMIN_BASE_URL } from '../../service/StudentService';
 import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { addIndividual,findStudent } from '../../slices/AdminFindStudent';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 export const EditStudent = ({isOpen, setIsOpen,open,close}) => {
@@ -68,7 +69,7 @@ export const EditStudent = ({isOpen, setIsOpen,open,close}) => {
           }
         ).then(res=>{
             // console.log(res);
-            alert("Updated...");
+            Swal.fire("Updated...");
             close();
         })
         .catch(err=>{

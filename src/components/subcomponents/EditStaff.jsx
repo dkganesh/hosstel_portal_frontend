@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import HostelService, { ADMIN_BASE_URL } from '../../service/HostelService';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 export const EditStaff = ({isOpen, setIsOpen,open,close}) => {
@@ -65,7 +66,7 @@ export const EditStaff = ({isOpen, setIsOpen,open,close}) => {
         // let x=res.data;
         // console.log(x);
         clear();
-        alert(res.data);
+        Swal.fire(res.data);
         
        }).catch(err=>{
         console.log(err);

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import HostelService, { ADMIN_BASE_URL } from '../../service/HostelService';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 export const AddStaff = ({isOpen, setIsOpen,open,close}) => {
@@ -36,7 +37,7 @@ export const AddStaff = ({isOpen, setIsOpen,open,close}) => {
         console.log(res.data);
         let x=res.data;
         console.log(x);
-        alert(res.data);
+        Swal.fire(res.data);
        }).catch(err=>{
         console.log(err);
         if(err.response.status === 401)nav("/");

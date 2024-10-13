@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { SERVER_URL } from '../../service/AuthenticationServices';
 import axios from 'axios';
 import { pushPassList } from '../../slices/PassList';
+import Swal from 'sweetalert2';
 
 
 export const PassDetails = ({isOpen, setIsOpen,open,close}) => {
@@ -58,7 +59,7 @@ export const PassDetails = ({isOpen, setIsOpen,open,close}) => {
             const response = await axios.get(link,{
                 headers:{Authorization:"Bearer "+token}
               });
-              alert(response.data);
+              Swal.fire(response.data);
               close;
             
         } catch (err) {
@@ -73,7 +74,7 @@ export const PassDetails = ({isOpen, setIsOpen,open,close}) => {
             const response = await axios.get(link,{
                 headers:{Authorization:"Bearer "+token}
               });
-              alert(response.data);
+              Swal.fire(response.data);
               close;
 
         } catch (err) {

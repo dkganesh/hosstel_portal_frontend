@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import HostelService, { ADMIN_BASE_URL } from '../../service/HostelService';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export const AddRoom = ({isOpen, setIsOpen,open,close}) => {
     const [room,setRoom] = useState({
@@ -23,7 +24,7 @@ export const AddRoom = ({isOpen, setIsOpen,open,close}) => {
         HostelService.addRoomService(link,room,{
           headers:{Authorization:"Bearer "+token}
         }).then(res=>{
-            alert("Room Added");
+            Swal.fire("Room Added");
             close();
         })
         .catch(err=>{

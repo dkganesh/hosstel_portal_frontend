@@ -1,4 +1,5 @@
 import emailjs from '@emailjs/browser';
+import Swal from 'sweetalert2';
 
 
 export function SendEmail(res,student){
@@ -17,10 +18,14 @@ export function SendEmail(res,student){
       )
       .then(
         () => {
-        alert("Verify your mail");
+        Swal.fire({
+          title: "Registred",
+          text: "Check your Email",
+          icon: "success"
+        });
         },
         (error) => {
-            alert("Failed");
+          Swal.fire("Something went wrong...");
         }
       );
 }

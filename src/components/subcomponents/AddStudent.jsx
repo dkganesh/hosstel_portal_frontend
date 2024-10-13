@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import StudentService, { ADMIN_BASE_URL } from '../../service/StudentService';
 import { useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 
 export const AddStudent = ({isOpen, setIsOpen,open,close}) => {
 
@@ -29,7 +30,7 @@ export const AddStudent = ({isOpen, setIsOpen,open,close}) => {
         StudentService.admin_addStudent(link,student,{
             headers:{Authorization:"Bearer "+token}
           }).then(res=>{
-            alert("Student Added...");
+            Swal.fire("Student Added...");
             close();
         })
         .catch(err=>{

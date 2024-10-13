@@ -5,6 +5,7 @@ import { BlockStudent } from './BlockStudent';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { putArray } from '../../slices/GetByBlock';
+import Swal from 'sweetalert2';
 
 export const SortByDept = ({isOpen, setIsOpen,open,close}) => {
     const [dept,setDept]=useState("");
@@ -35,7 +36,7 @@ export const SortByDept = ({isOpen, setIsOpen,open,close}) => {
        catch(err){
          console.log(err);
          if(err.response.status === 401)nav("/");
-        alert("Try again...");
+        Swal.fire("Try again...");
         close();
        }
       }

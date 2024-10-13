@@ -4,6 +4,7 @@ import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import HostelService, { ADMIN_BASE_URL } from '../../service/HostelService';
 import { useNavigate } from 'react-router-dom';
 import StudentService from '../../service/StudentService';
+import Swal from 'sweetalert2';
 
 export const ResetPass = ({isOpen, setIsOpen,open,close}) => {
     const [pass,setPass] = useState({
@@ -24,7 +25,7 @@ export const ResetPass = ({isOpen, setIsOpen,open,close}) => {
         StudentService.resetPassword(link,pass,{
           headers:{Authorization:"Bearer "+token}
         }).then(res=>{
-            alert("Password Changed...");
+            Swal.fire("Password Changed...");
             close();
         })
         .catch(err=>{

@@ -6,6 +6,7 @@ import StudentService from '../service/StudentService';
 import { LoggedHeader } from './LoggedHeader';
 import { useNavigate } from 'react-router-dom';
 import { SendEmail } from '../SendEmail';
+import Swal from 'sweetalert2';
 
 export const StudentSignUpForm = () => {
     const [load,setLoad]= useState(false);
@@ -74,7 +75,11 @@ export const StudentSignUpForm = () => {
 
 
         clearFunction(e);}
-        else  alert("invalid entry")
+        else  Swal.fire({
+            title: "Error",
+            text: "Invalid Entry...",
+            icon: "error"
+          });
     }
     const validate = (e)=>{
         return e.email!=""&&

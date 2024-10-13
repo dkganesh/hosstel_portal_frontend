@@ -9,6 +9,7 @@ import { putArray } from '../slices/GetByBlock';
 import { logon } from '../session/JwtToken';
 import axios from 'axios';
 import { SERVER_URL } from '../service/AuthenticationServices';
+import Swal from 'sweetalert2';
 
 export const LoggedHeader = () => {
 const[load,setLoad]=useState(false);
@@ -87,13 +88,13 @@ const[load,setLoad]=useState(false);
       // window.location.reload(true);
       // console.log("refereshed");
       setLoad(false);
-      alert("Logged out");
+      Swal.fire("Logged out");
       nav("/");
       }
     } catch (err) {
       console.log(err);
       setLoad(false);
-      alert("Logged out");
+      Swal.fire("Logged out");
       nav("/");
     }
   }

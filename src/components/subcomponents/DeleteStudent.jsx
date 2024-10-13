@@ -3,6 +3,7 @@ import StudentService, { ADMIN_BASE_URL } from '../../service/StudentService';
 import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 export const DeleteStudent = ({isOpen, setIsOpen,open,close}) => {
@@ -23,7 +24,7 @@ export const DeleteStudent = ({isOpen, setIsOpen,open,close}) => {
           {
             headers:{Authorization:"Bearer "+token}
           }
-        ).then(res=>{alert(res.data)}).catch(err=>{console.log(err)
+        ).then(res=>{Swal.fire(res.data);}).catch(err=>{console.log(err)
           if(err.response.status === 401)nav("/");
         });
         // console.log("completed");
