@@ -7,6 +7,7 @@ import summaFunction, { logon } from '../session/JwtToken';
 import { useNavigate } from 'react-router-dom';
 import { SERVER_URL } from '../service/AuthenticationServices';
 import { updateUser } from '../session/UserDetails';
+import Swal from 'sweetalert2'
 
 export const StudentSignInForm = () => {
   const dispatch= useDispatch();
@@ -32,13 +33,22 @@ export const StudentSignInForm = () => {
       dispatch(logon(true));
       dispatch(addInputs(loginForm));
       setLoad(false)
-      alert("Successfuly logged in");
+      alert();
+      Swal.fire({
+        title: "Success!",
+        text: "You are logged in!",
+        icon: "success"
+      });
       nav("/studentPanel");
     }
     catch(err){
       console.log(err);
       setLoad(false);
-      alert("Incorrect Credentials!!!")
+      Swal.fire({
+        title: "Error!",
+        text: "Incorrect Credentials!!!",
+        icon: "error"
+      });
       nav("/");
     }
     // console.log("saved to state from handle submit");

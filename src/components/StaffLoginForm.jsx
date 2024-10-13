@@ -6,6 +6,7 @@ import StudentService, { ADMIN_BASE_URL } from '../service/StudentService';
 import summaFunction, { logon } from '../session/JwtToken';
 import { useNavigate } from 'react-router-dom';
 import { SERVER_URL } from '../service/AuthenticationServices';
+import Swal from 'sweetalert2';
 
 export const StaffLoginForm = () => {
   const dispatch= useDispatch();
@@ -29,13 +30,22 @@ export const StaffLoginForm = () => {
       // console.log(response.data);
       dispatch(logon(true));
       setLoad(false);
-      alert("Successfuly logged in");
+      // alert("Successfuly logged in");
+      Swal.fire({
+        title: "Success!",
+        text: "You are logged in!",
+        icon: "success"
+      });
       nav("/adminPanel");
     }
     catch(err){
       console.log(err);
       setLoad(false)
-      alert("Incorrect Credentials!!!");
+      Swal.fire({
+        title: "Error!",
+        text: "Incorrect Credentials!!!",
+        icon: "error"
+      });
       nav("/");
     }
     // console.log("saved to state from handle submit");
