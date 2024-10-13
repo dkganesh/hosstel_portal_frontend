@@ -33,7 +33,6 @@ export const StudentSignInForm = () => {
       dispatch(logon(true));
       dispatch(addInputs(loginForm));
       setLoad(false)
-      alert();
       Swal.fire({
         title: "Success!",
         text: "You are logged in!",
