@@ -167,7 +167,7 @@ export const StudentSignUpForm = () => {
                     </div>
                     <input type="password" name="password" id="std_sign_password" value={student.password} required placeholder="Password" onChange={handleChange} className='border-2 border-gray-600 mx-4 mb-3 min-w-[250px] rounded-md px-3 min-h-9 placeholder:font-extralight'/>
 
-                    <input type="password" name="pass" id="std_sign_retypePassword" required placeholder="Retype Password" className='border-2 border-gray-600 mx-4 mb-3 min-w-[250px] rounded-md px-3 min-h-9 placeholder:font-extralight'/>
+                    {/* <input type="password" name="pass" id="std_sign_retypePassword" required placeholder="Retype Password" className='border-2 border-gray-600 mx-4 mb-3 min-w-[250px] rounded-md px-3 min-h-9 placeholder:font-extralight'/> */}
 
 
                 </div>
