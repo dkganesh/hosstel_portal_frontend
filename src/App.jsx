@@ -20,7 +20,7 @@ function App() {
         const res= axios.get(SERVER_URL+"/");
         console.log(res);
       } catch (error) {
-        console.log(error+ "->  from awake api call");
+        console.log("from awake api call");
       }
     }
     call();
