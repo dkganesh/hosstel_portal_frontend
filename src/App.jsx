@@ -14,17 +14,17 @@ import { SERVER_URL } from "./service/AuthenticationServices"
 
 
 function App() {
-  useEffect(()=>{
-     function call(){
-      try {
-        const res= axios.get(SERVER_URL+"/");
-        console.log(res);
-      } catch (error) {
-        console.log("from awake api call");
-      }
-    }
-    call();
-  },[])
+  // useEffect(()=>{
+  //    function call(){
+  //     try {
+  //       const res= axios.get(SERVER_URL+"/");
+  //       console.log(res);
+  //     } catch (error) {
+  //       console.log("from awake api call");
+  //     }
+  //   }
+  //   call();
+  // },[])
 
   return (
     <Provider store={store}>
