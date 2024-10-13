@@ -8,9 +8,23 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { StudentPanel } from "./components/StudentPanel"
 import { StaffLoginForm } from "./components/StaffLoginForm"
 import { LoggedHeader } from "./components/LoggedHeader"
+import { useEffect } from "react"
+import axios from "axios"
+import { SERVER_URL } from "./service/AuthenticationServices"
 
 
 function App() {
+  useEffect(()=>{
+    async function call(){
+      try {
+        const res=await axios.get(SERVER_URL+"/");
+        console.log(res);
+      } catch (error) {
+        console.log(error+ "->  from awake api call");
+      }
+    }
+    call();
+  },[])
 
   return (
     <Provider store={store}>
@@ -24,6 +38,7 @@ function App() {
           <Route path="/register" element={<StudentSignUpForm/>}/>
         </Routes>
       </BrowserRouter>
+
     </Provider>
   )
 }
