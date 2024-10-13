@@ -15,9 +15,9 @@ import { SERVER_URL } from "./service/AuthenticationServices"
 
 function App() {
   useEffect(()=>{
-    async function call(){
+     function call(){
       try {
-        const res=await axios.get(SERVER_URL+"/");
+        const res= axios.get(SERVER_URL+"/");
         console.log(res);
       } catch (error) {
         console.log(error+ "->  from awake api call");
