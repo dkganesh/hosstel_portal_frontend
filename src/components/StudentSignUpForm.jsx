@@ -173,7 +173,7 @@ export const StudentSignUpForm = () => {
                 </div>
                 <div className="flex flex-row justify-center items-center mt-2">
                     <button type='submit' className=' mx-4 mb-3 rounded-md px-3 bg-green-400 border-2 border-green-600 font-normal py-1 hover:bg-green-600 '>Register</button>
-                    {load && <div className='inline-block h-[30px] w-[30px] border-x-4 border-blue-600 animate-spin rounded-full mb-3'></div>}
+                    {load && <div className='inline-block h-[30px] w-[30px] border-4 border-t-blue-500 border-r-blue-500  border-b-black border-l-black animate-spin rounded-full mb-3'></div>}
                     <button className=' mx-4 mb-3 rounded-md px-3 bg-yellow-300 border-2 border-yellow-500 font-normal py-1 hover:bg-yellow-500 ' onClick={clearFunction}>Clear</button>
                     <button className=' mx-4 mb-3 rounded-md px-3 bg-green-400 border-2 border-green-600 font-normal py-1 hover:bg-green-600 ' onClick={()=>nav("/")}>LogIn</button>
 

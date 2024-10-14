@@ -8,27 +8,38 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { StudentPanel } from "./components/StudentPanel"
 import { StaffLoginForm } from "./components/StaffLoginForm"
 import { LoggedHeader } from "./components/LoggedHeader"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import { SERVER_URL } from "./service/AuthenticationServices"
 
 
 function App() {
-  // useEffect(()=>{
-  //    function call(){
-  //     try {
-  //       const res= axios.get(SERVER_URL+"/");
-  //       console.log(res);
-  //     } catch (error) {
-  //       console.log("from awake api call");
-  //     }
-  //   }
-  //   call();
-  // },[])
+  const [loading,setLoading]=useState(true);
+  useEffect(()=>{
+     async function call(){
+      try {
+        const res= await axios.get(SERVER_URL+"/");
+        console.log(res.data);
+        setLoading(false);
+      } catch (error) {
+        console.log("from awake api call");
+        setLoading(false);
+      }
+    }
+    call();
+  },[])
 
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      {loading &&
+        <>
+          <div className="w-full min-h-[90vh] flex items-center justify-center m-auto p-3 ">
+            <div className="rounded-full border-4 h-[150px] w-[150px]  text-center flex items-center justify-center animate-spin border-t-blue-500 border-x-transparent border-b-black"><h1 className="animate-reverse-spin">Starting Server <br />
+            <span className="font-thin text-sm">made By DK</span></h1></div>
+          </div>
+        </>
+      }
+      {!loading && <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<StudentSignInForm/>}/>
@@ -37,7 +48,7 @@ function App() {
           <Route path="/studentPanel" element={<StudentPanel/>}/>
           <Route path="/register" element={<StudentSignUpForm/>}/>
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter>}
 
     </Provider>
   )

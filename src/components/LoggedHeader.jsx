@@ -106,7 +106,7 @@ const[load,setLoad]=useState(false);
         <button className='mx-3 bg-red-400 rounded-md px-3 py-1 hover:bg-red-500 border-2 border-red-500'
         onClick={clearToken}
         >Logout</button>
-        {load && <div className='ml-3 h-[30px] w-[30px] border-x-4 border-blue-600 animate-spin rounded-full'></div>}
+        {load && <div className='ml-3 h-[30px] w-[30px] border-4 border-t-blue-500 border-r-blue-500  border-b-black border-l-black animate-spin rounded-full'></div>}
     </div>
   )
 }

@@ -60,7 +60,7 @@ export const StaffLoginForm = () => {
             <input type="email" name="email" id="std_login_email" value={loginForm.email} onChange={handleChange} required placeholder="Email" className='border-2 border-gray-600 mx-4 mb-3 min-w-[250px] rounded-md px-3 min-h-9 placeholder:font-light'/>
 
             <input type="password" name="password" id="std_login_password" value={loginForm.password} required onChange={handleChange} placeholder="Password" className='border-2 border-gray-600 mx-4 mb-3 min-w-[250px] rounded-md px-3 min-h-9 placeholder:font-light'/>
-            {load && <div className='mb-3 h-[30px] w-[30px] border-x-4 border-blue-600 animate-spin rounded-full'></div>}
+            {load && <div className='mb-3 h-[30px] w-[30px] border-4 border-t-blue-500 border-r-blue-500  border-b-black border-l-black animate-spin rounded-full'></div>}
             <div className="">
             <button type='submit' className=' mx-4 mb-3 rounded-md px-3 bg-green-400 border-2 border-green-600 font-normal py-1 hover:bg-green-600 '>Submit</button>
             <button className=' mx-4 mb-3 rounded-md px-3 bg-yellow-400 border-2 border-yellow-600 font-normal py-1 hover:bg-yellow-600 ' onClick={e=>{e.preventDefault();setLoginForm({email:"",password:""})}}>Clear</button>
