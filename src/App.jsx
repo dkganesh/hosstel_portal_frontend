@@ -34,7 +34,7 @@ function App() {
       {loading &&
         <>
           <div className="w-full min-h-[90vh] flex items-center justify-center m-auto p-3 ">
-            <div className="rounded-full border-4 h-[150px] w-[150px]  text-center flex items-center justify-center animate-spin border-t-blue-500 border-x-transparent border-b-black"><h1 className="animate-reverse-spin">Starting Server <br />
+            <div className="rounded-full border-4 h-[150px] w-[150px]  text-center flex items-center justify-center animate-spin border-t-blue-500 border-x-transparent border-b-black"><h1 className="animate-reverse-spin">Loading Server <br />
             <span className="font-thin text-sm">made By DK</span></h1></div>
           </div>
         </>
