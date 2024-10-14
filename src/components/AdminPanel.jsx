@@ -18,24 +18,27 @@ export const AdminPanel = () => {
         call();
     },[]);
 
+    function call(){
+        nav("/")
+    }
     async function shutdown(){
         try {
             const res =await axios.get(SERVER_URL+"/admin/shutdown-server");
-            console.log(res);
+            // console.log(res);
             Swal.fire({
                 title: "Server is down now...",
                 text: "Auto logout initiated",
                 icon: "info"
               });
-              setTimeout(nav("/"),2000);
+              setTimeout(call,2000);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             Swal.fire({
                 title: "Server is down now...",
                 text: "Auto logout initiated",
                 icon: "info"
               });
-              setTimeout(nav("/"),2000);
+              setTimeout(call,2000);
         }
     }
 
