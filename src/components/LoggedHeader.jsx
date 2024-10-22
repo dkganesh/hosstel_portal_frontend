@@ -10,6 +10,9 @@ import { logon } from '../session/JwtToken';
 import axios from 'axios';
 import { SERVER_URL } from '../service/AuthenticationServices';
 import Swal from 'sweetalert2';
+import { addBlock } from '../slices/GetBlock';
+import { addDept } from '../slices/GetDepartment';
+import { addRt } from '../slices/GetStaff';
 
 export const LoggedHeader = () => {
 const[load,setLoad]=useState(false);
@@ -17,7 +20,8 @@ const[load,setLoad]=useState(false);
   const nav=useNavigate();
   const dispatch = useDispatch();
   function clearCache(e){
-    dispatch(findStudent({name:"",
+    dispatch(
+      findStudent({name:"",
       email:"",
       phone:"",
       password:"",
@@ -70,8 +74,12 @@ const[load,setLoad]=useState(false);
 
         dispatch(putArray([]));
 
+        dispatch(addBlock([]));
+        dispatch(addRt([]));
+        dispatch(addDept([]));
+
         // alert("Cache data cleared");
-        if(e!="" && e!=null || e!=undefined)alert(e);
+        if(e!="" && e!=null || e!=undefined)Swal.fire(e);
   }
   const token =useSelector((state)=>state.jwt_token_authentication);
   async function clearToken(e){

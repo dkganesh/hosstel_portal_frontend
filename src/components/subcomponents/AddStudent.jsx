@@ -2,10 +2,41 @@ import React, { useState } from 'react'
 
 import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import StudentService, { ADMIN_BASE_URL } from '../../service/StudentService';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
+import axios from 'axios';
+import { SERVER_URL } from '../../service/AuthenticationServices';
+import { addBlock } from '../../slices/GetBlock';
+import { addRt } from '../../slices/GetStaff';
+import { addDept } from '../../slices/GetDepartment';
 
 export const AddStudent = ({isOpen, setIsOpen,open,close}) => {
+    const token = useSelector((state)=>state.jwt_token_authentication);
+    let block =null;
+    let rt =null;
+    let dept =null;
+    const dispatch= useDispatch();
+
+    useState(()=>{
+        let link=SERVER_URL + "/admin/getBlocks";
+        let link2=SERVER_URL + "/admin/getRt";
+        let link3=SERVER_URL + "/admin/getDepartment";
+         async function getBlocks(){
+            try {
+                const res= await axios.get(link);
+                const resrt= await axios.get(link2);
+                const resdept= await axios.get(link3,);
+                // console.log(res.data);
+                dispatch(addBlock(res.data));
+                dispatch(addRt(resrt.data));
+                dispatch(addDept(resdept.data));
+
+            } catch (error) {
+                console.log("Error in retriving blocks data...");
+            }
+            }
+        getBlocks();
+    },[])
 
     const[student,setStudent]=useState({
         name:"",
@@ -23,19 +54,19 @@ export const AddStudent = ({isOpen, setIsOpen,open,close}) => {
         block:"",
         room:""
         })
-        const token = useSelector((state)=>state.jwt_token_authentication)
+        
     function handleSubmit(e){
         e.preventDefault();
         const link=ADMIN_BASE_URL+"/addStudent"
         StudentService.admin_addStudent(link,student,{
             headers:{Authorization:"Bearer "+token}
           }).then(res=>{
-            Swal.fire("Student Added...");
+            Swal.fire("Student Added");
             close();
         })
         .catch(err=>{
             console.log(err);
-            if(err.response.status === 401)nav("/");
+            if(err.response.status === 401)alert("Try Again");
         })
     }
     function handleChange(e){
@@ -58,6 +89,9 @@ export const AddStudent = ({isOpen, setIsOpen,open,close}) => {
             room:""})
     }
 
+    block = useSelector((state)=>state.get_block);
+    rt=useSelector((state)=>state.get_rt);
+    dept=useSelector((state)=>state.get_dept);
   return (
     <Dialog open={isOpen} as="div" className="relative z-10 focus:outline-none" onClose={close}>
     <div className="fixed inset-0 z-10 w-screen overflow-y-auto ">
@@ -97,8 +131,8 @@ export const AddStudent = ({isOpen, setIsOpen,open,close}) => {
                         <label htmlFor="department" className='pl-5 text-center font-extralight text-md py-1 px-2 mb-3 '>Department</label>
                         <select name="department" id="department" value={student.department} onChange={handleChange} required>
                             <option value=""></option>
-                            <option value="EEE" className='p-4 font-light '>ELECTRICAL</option>
-                            <option value="ECE" className='p-4 font-light '>E-COMMUNICATION</option>
+                            {dept.map(e=><option value={e.departmentName}  key={e.departmentName} className='p-4 font-light '>{e.departmentName}</option>)}
+                            {/* <option value="ECE" className='p-4 font-light '>E-COMMUNICATION</option>
                             <option value="IT" className='p-4 font-light '>INFORMATION TECHNOLOGY</option>
                             <option value="CHE" className='p-4 font-light '>CHEMICAL</option>
                             <option value="ME" className='p-4 font-light '>MACHANICAL</option>
@@ -106,7 +140,7 @@ export const AddStudent = ({isOpen, setIsOpen,open,close}) => {
                             <option value="CVE" className='p-4 font-light '>CIVIL</option>
                             <option value="AUT" className='p-4 font-light '>AUTOMOBILE</option>
                             <option value="CSE" className='p-4 font-light '>COMPUTER SCIENCE</option>
-                            <option value="AIDS" className='p-4 font-light '>ARITIFICIAL INTELLIGENCE</option>
+                            <option value="AIDS" className='p-4 font-light '>ARITIFICIAL INTELLIGENCE</option> */}
                         </select>
                     </div>
 
@@ -114,11 +148,12 @@ export const AddStudent = ({isOpen, setIsOpen,open,close}) => {
                         <label htmlFor="block" className='pl-5 text-center font-extralight text-md py-1 px-2 mb-3'>Hostel Block</label>
                         <select name="block" id="block" value={student.block} onChange={handleChange} required>
                             <option value=""></option>
-                            <option value="1" className='p-4 font-light '>Block 1</option>
+                            {/* <option value="1" className='p-4 font-light '>Block 1</option>
                             <option value="2" className='p-4 font-light '>Block 2</option>
                             <option value="3" className='p-4 font-light '>Block 3</option>
                             <option value="4" className='p-4 font-light '>Block 4</option>
-                            <option value="5" className='p-4 font-light '>Block 5</option>
+                            <option value="5" className='p-4 font-light '>Block 5</option> */}
+                            {block.map(e=><option value={e.id} key={e.id} className='p-4 font-light '>Block {e.blockName}</option>)}
                         </select>
                     </div>
 
@@ -126,11 +161,11 @@ export const AddStudent = ({isOpen, setIsOpen,open,close}) => {
                         <label htmlFor="staff" className='pl-5 text-center font-extralight text-md py-1 px-2 mb-3'>RT</label>
                         <select name="staff" onChange={handleChange} id="staff"  value={student.staff} required>
                             <option value=""></option>
-                            <option value="1" className='p-4 font-light '>Annamalai</option>
-                            <option value="2" className='p-4 font-light '>NaveenKumar</option>
+                            {rt.map(e=><option value={e.id} className='p-4 font-light ' key={e.id}>{e.name}</option>)}
+                            {/* <option value="2" className='p-4 font-light '>NaveenKumar</option>
                             <option value="3" className='p-4 font-light '>Boopathy</option>
                             <option value="4" className='p-4 font-light '>CivilSir</option>
-                            <option value="5" className='p-4 font-light '>NewSir</option>
+                            <option value="5" className='p-4 font-light '>NewSir</option> */}
                         </select>
                     </div>
                     <input type="password" name="password" id="std_sign_password" value={student.password} required placeholder="Password" onChange={handleChange} className='border-2 border-gray-600 mx-4 mb-3 min-w-[250px] rounded-md px-3 min-h-9 placeholder:font-extralight'/>

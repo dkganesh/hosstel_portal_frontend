@@ -29,7 +29,7 @@ export const RoomDetails = ({isOpen, setIsOpen,open,close}) => {
         setLoading(false);
         }catch(err){
             console.log(err);
-            if(err.response.status === 401)nav("/");
+            if(err.response.status === 401)alert("Try Again");
         }
     }
     students =useSelector((state)=>state.get_by_block_state);

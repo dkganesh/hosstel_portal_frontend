@@ -40,7 +40,7 @@ export const EditStudent = ({isOpen, setIsOpen,open,close}) => {
         }catch(err){
             console.log(err);
             // console.log(err.response.status);
-            if(err.response.status == 401 || err.response.status=="401")nav("/");
+            if(err.response.status == 401 || err.response.status=="401")alert("Try Again");
         }
         
         

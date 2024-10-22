@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from "axios";
 import { addStudentSignUp } from '../slices/Student_SignUp_Slice';
 import StudentService from '../service/StudentService';
@@ -7,9 +7,45 @@ import { LoggedHeader } from './LoggedHeader';
 import { useNavigate } from 'react-router-dom';
 import { SendEmail } from '../SendEmail';
 import Swal from 'sweetalert2';
+import { SERVER_URL } from '../service/AuthenticationServices';
+import { addBlock } from '../slices/GetBlock';
+import { addRt } from '../slices/GetStaff';
+import { addDept } from '../slices/GetDepartment';
 
 export const StudentSignUpForm = () => {
     const [load,setLoad]= useState(false);
+
+    // const token = useSelector((state)=>state.jwt_token_authentication);
+
+    let block =null;
+    let rt =null;
+    let dept =null;
+    const dispatch= useDispatch();
+
+    useState(()=>{
+        let link=SERVER_URL + "/admin/getBlocks";
+        let link2=SERVER_URL + "/admin/getRt";
+        let link3=SERVER_URL + "/admin/getDepartment";
+         async function getBlocks(){
+            try {
+                const res= await axios.get(link,);
+                const resrt= await axios.get(link2);
+                const resdept= await axios.get(link3);
+                // console.log(res.data);
+                dispatch(addBlock(res.data));
+                dispatch(addRt(resrt.data));
+                dispatch(addDept(resdept.data));
+
+            } catch (error) {
+                console.log("Error in retriving blocks data...");
+            }
+            }
+        getBlocks();
+    },[])
+
+
+
+
 
     const nav=useNavigate();
     const[student,setStudent]=useState({
@@ -51,7 +87,6 @@ export const StudentSignUpForm = () => {
             block:"",
             room:""})
     }
-    const dispatch =useDispatch();
     function handleSubmit(e){
         setLoad(true);
         if(validate(student)){
@@ -96,6 +131,12 @@ export const StudentSignUpForm = () => {
         e.block!=""&&
         e.room!="";
     }
+
+    block = useSelector((state)=>state.get_block);
+    rt=useSelector((state)=>state.get_rt);
+    dept=useSelector((state)=>state.get_dept);
+
+
   return (
         <div className="w-[98vw] max-w-[91.6666%] m-auto  bg-white rounded-md min-h-[80%] mt-[8em] mb-[2em]">
             {/* <LoggedHeader/> */}
@@ -129,7 +170,8 @@ export const StudentSignUpForm = () => {
                         <label htmlFor="department" className='pl-5 text-center font-extralight text-md py-1 px-2 mb-3 '>Department</label>
                         <select name="department" id="department" value={student.department} onChange={handleChange} required>
                             <option value=""></option>
-                            <option value="EEE" className='p-4 font-light '>ELECTRICAL</option>
+                            {dept.map(e=><option value={e.departmentName}  key={e.departmentName} className='p-4 font-light '>{e.departmentName}</option>)}
+                            {/* <option value="EEE" className='p-4 font-light '>ELECTRICAL</option>
                             <option value="ECE" className='p-4 font-light '>E-COMMUNICATION</option>
                             <option value="IT" className='p-4 font-light '>INFORMATION TECHNOLOGY</option>
                             <option value="CHE" className='p-4 font-light '>CHEMICAL</option>
@@ -138,7 +180,7 @@ export const StudentSignUpForm = () => {
                             <option value="CVE" className='p-4 font-light '>CIVIL</option>
                             <option value="AUT" className='p-4 font-light '>AUTOMOBILE</option>
                             <option value="CSE" className='p-4 font-light '>COMPUTER SCIENCE</option>
-                            <option value="AIDS" className='p-4 font-light '>ARITIFICIAL INTELLIGENCE</option>
+                            <option value="AIDS" className='p-4 font-light '>ARITIFICIAL INTELLIGENCE</option> */}
                         </select>
                     </div>
 
@@ -146,11 +188,12 @@ export const StudentSignUpForm = () => {
                         <label htmlFor="block" className='pl-5 text-center font-extralight text-md py-1 px-2 mb-3'>Hostel Block</label>
                         <select name="block" id="block" value={student.block} onChange={handleChange} required>
                             <option value=""></option>
-                            <option value="1" className='p-4 font-light '>Block 1</option>
+                            {/* <option value="1" className='p-4 font-light '>Block 1</option>
                             <option value="2" className='p-4 font-light '>Block 2</option>
                             <option value="3" className='p-4 font-light '>Block 3</option>
                             <option value="4" className='p-4 font-light '>Block 4</option>
-                            <option value="5" className='p-4 font-light '>Block 5</option>
+                            <option value="5" className='p-4 font-light '>Block 5</option> */}
+                             {block.map(e=><option value={e.id} key={e.id} className='p-4 font-light '>Block {e.blockName}</option>)}
                         </select>
                     </div>
 
@@ -158,11 +201,12 @@ export const StudentSignUpForm = () => {
                         <label htmlFor="staff" className='pl-5 text-center font-extralight text-md py-1 px-2 mb-3'>RT</label>
                         <select name="staff" onChange={handleChange} id="staff"  value={student.staff} required>
                             <option value=""></option>
-                            <option value="1" className='p-4 font-light '>Annamalai</option>
+                            {/* <option value="1" className='p-4 font-light '>Annamalai</option>
                             <option value="2" className='p-4 font-light '>NaveenKumar</option>
                             <option value="3" className='p-4 font-light '>Boopathy</option>
                             <option value="4" className='p-4 font-light '>CivilSir</option>
-                            <option value="5" className='p-4 font-light '>NewSir</option>
+                            <option value="5" className='p-4 font-light '>NewSir</option> */}
+                            {rt.map(e=><option value={e.id} className='p-4 font-light ' key={e.id}>{e.name}</option>)}
                         </select>
                     </div>
                     <input type="password" name="password" id="std_sign_password" value={student.password} required placeholder="Password" onChange={handleChange} className='border-2 border-gray-600 mx-4 mb-3 min-w-[250px] rounded-md px-3 min-h-9 placeholder:font-extralight'/>
@@ -175,7 +219,7 @@ export const StudentSignUpForm = () => {
                     <button type='submit' className=' mx-4 mb-3 rounded-md px-3 bg-green-400 border-2 border-green-600 font-normal py-1 hover:bg-green-600 '>Register</button>
                     {load && <div className='inline-block h-[30px] w-[30px] border-4 border-t-blue-500 border-r-blue-500  border-b-black border-l-black animate-spin rounded-full mb-3'></div>}
                     <button className=' mx-4 mb-3 rounded-md px-3 bg-yellow-300 border-2 border-yellow-500 font-normal py-1 hover:bg-yellow-500 ' onClick={clearFunction}>Clear</button>
-                    <button className=' mx-4 mb-3 rounded-md px-3 bg-green-400 border-2 border-green-600 font-normal py-1 hover:bg-green-600 ' onClick={()=>nav("/")}>LogIn</button>
+                    <button className=' mx-4 mb-3 rounded-md px-3 bg-green-400 border-2 border-green-600 font-normal py-1 hover:bg-green-600 ' onClick={()=>nav("/login")}>LogIn</button>
 
                 </div>
 

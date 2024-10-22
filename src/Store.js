@@ -6,7 +6,11 @@ import JwtTokenSlice from "./session/JwtTokenSlice";
 import GetByBlock from "./slices/GetByBlock";
 import JwtToken from "./session/JwtToken"
 import UserDetails from "./session/UserDetails";
-import PassList from "./slices/PassList"
+import PassList from "./slices/PassList";
+import GetBlock from "./slices/GetBlock";
+import GetRt from "./slices/GetStaff";
+import GetDept from "./slices/GetDepartment";
+
 
 export const store = configureStore({
     devTools:true,
@@ -18,6 +22,9 @@ export const store = configureStore({
         get_by_block_state:GetByBlock,
         logged:JwtToken,
         logged_user:UserDetails,
-        pass_list:PassList
+        pass_list:PassList,
+        get_block:GetBlock,
+        get_rt:GetRt,
+        get_dept:GetDept
     }
 });

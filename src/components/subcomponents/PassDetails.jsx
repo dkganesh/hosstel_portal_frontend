@@ -64,7 +64,7 @@ export const PassDetails = ({isOpen, setIsOpen,open,close}) => {
             
         } catch (err) {
             console.log(err);
-            if(err.status == 401)nav("/");
+            if(err.status == 401)alert("Try Again");
         }
     }
 

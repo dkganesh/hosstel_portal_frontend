@@ -35,8 +35,8 @@ export const SortByBlock = ({isOpen, setIsOpen,open,close}) => {
        }
        catch(err){
          console.log(err);
-         if(err.response.status === 401)nav("/");
-        Swal.fire("Try again...");
+         if(err.response.status === 401)alert("Try Again");
+        // Swal.fire("Try again...");
         close();
        }
       }

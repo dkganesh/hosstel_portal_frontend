@@ -48,7 +48,7 @@ export const EditStaff = ({isOpen, setIsOpen,open,close}) => {
         })).data;
         }catch(err){
             console.log(err);
-            if(err.response.status === 401)nav("/");
+            if(err.response.status === 401)alert("Try Again");
         }
         // console.log(response);
         setStaff(response);

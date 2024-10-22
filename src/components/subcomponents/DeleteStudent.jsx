@@ -24,8 +24,8 @@ export const DeleteStudent = ({isOpen, setIsOpen,open,close}) => {
           {
             headers:{Authorization:"Bearer "+token}
           }
-        ).then(res=>{Swal.fire(res.data);}).catch(err=>{console.log(err)
-          if(err.response.status === 401)nav("/");
+        ).then(res=>{if(res.data)Swal.fire("Deleted");}).catch(err=>{console.log(err)
+          if(err.response.status === 401)alert("Try Again");
         });
         // console.log("completed");
         setEmail("");

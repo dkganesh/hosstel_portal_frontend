@@ -30,7 +30,7 @@ export const ResetPass = ({isOpen, setIsOpen,open,close}) => {
         })
         .catch(err=>{
             console.log(err);
-            if(err.response.status === 401)nav("/");
+            if(err.response.status === 401)alert("Try Again");
         })
     }
   return (

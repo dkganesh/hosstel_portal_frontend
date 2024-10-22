@@ -40,7 +40,7 @@ export const AddStaff = ({isOpen, setIsOpen,open,close}) => {
         Swal.fire(res.data);
        }).catch(err=>{
         console.log(err);
-        if(err.response.status === 401)nav("/");
+        if(err.response.status === 401)alert("Try Again");
        })
         close();
     }
